@@ -1,0 +1,4 @@
+nm@gmail.com 0000 customer
+adminClean@gmail.com adminCSS admin
+alaa@gmail.com alaa20 customer
+weaam@gmail.com 1234 customer
