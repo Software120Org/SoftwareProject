@@ -30,7 +30,7 @@ public class Regis {
     }
 
     public Regis( String name,String email,String phone,String address,String password){
-       this.id = Database.getCategoryId();
+       this.id = Database.get_Id();
         this.name=name;
         this.password=password;
         this.email=email;
@@ -112,6 +112,17 @@ public boolean isValidEmail(){
     Matcher matcher=pattern.matcher(this.getEmail());
     return matcher.find();
 }
+
+    public boolean isExitCustomer(){
+        boolean flag=false;
+        for(Regis customer: Database.getCustomer()){
+            if(customer.getId()==this.id){
+                flag=true;
+                break;
+            }
+        }
+        return flag;
+    }
 
   /*  public void sendEmail(String title,String message,String msg){
         final String user = "rubasalon5@gmail.com";

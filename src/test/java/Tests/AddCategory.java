@@ -7,7 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import static Classes.RegisCust.logger;
+
 import static org.junit.Assert.*;
 
 
@@ -40,7 +40,7 @@ public class AddCategory {
         categories=new Categories(name);
         assertEquals(categories.getName(),name);
         admin.addCategory(categories);
-        logger.info("Category added successfully :)");
+        System.out.println("Category added successfully :)");
 
 
 

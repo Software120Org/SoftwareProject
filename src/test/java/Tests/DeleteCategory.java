@@ -26,11 +26,11 @@ public class DeleteCategory {
 
     @When("the entered category id is exist")
     public void the_entered_category_id_is_exist() {
-    category.setId(2);
+    category.setId(4);
     }
     @Then("the category will deleted")
     public void the_category_will_deleted() {
-        assertTrue(admin.isExistCategory(1));
+        assertTrue(admin.isExistCategory(4));
         admin.deleteCategory(category);
         logger.info("Category deleted successfully :)");
     }
@@ -38,12 +38,12 @@ public class DeleteCategory {
     @When("the entered category id is not exist")
     public void the_entered_category_id_is_not_exist() {
         category=new Categories();
-        category=Database.getCategoriesById(200);
+        category=Database.getCategoriesById(100);
     }
     @Then("the msg that the category not exist will be shown")
     public void the_msg_that_the_category_not_exist_will_be_shown() {
-        assertFalse(admin.isExistCategory(200));
-        logger.info("Category doesn't removed :( ");
+        assertFalse(admin.isExistCategory(100));
+        System.out.println("Category doesn't removed :( ");
         admin.deleteCategory(category);
     }
 

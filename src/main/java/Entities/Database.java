@@ -1,6 +1,7 @@
 package Entities;
 
 import Classes.Login2;
+import Classes.RegisCust;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -8,6 +9,7 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
 
 public class Database {
     static String msg= "Error";
@@ -49,10 +51,12 @@ public class Database {
 
         return list;
     }
+
+
     public static List<Entities.Regis>getCustomer(){
         List<Entities.Regis> cost =new ArrayList<>();
         for(String COTM:getObjects("RecordCustomer")){
-            String []arr=   COTM.split(",,");
+            String []arr=   COTM.split(",");
             try {
                 int customerId = Integer.parseInt(arr[0]);
                 Entities.Regis customer = new Entities.Regis(customerId, arr[1], arr[2], arr[3], arr[4], arr[5]);
@@ -66,6 +70,24 @@ public class Database {
         }
         return cost;
     }
+
+
+    public static void updateCustomers(List<Regis>customers){
+        try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/BE/RecordCustomer.txt", "rw")
+        ){
+            removeFileContent("RecordCustomer");
+            raf.seek(0);
+            for (Regis customer : customers) {
+                raf.writeBytes(customer.getId() + "," +customer.getname() + "," + customer.getEmail() + "," + customer.getPhone() + "," +
+                        customer.getAddress()+","+customer.getPassword() +"\r\n");
+
+            }
+        }
+        catch(Exception e){//ignored
+        }
+    }
+
+
     public static Entities.Regis GitCustomerbyE(String email){
         Entities.Regis existCustomer=new Entities.Regis();
         for (Entities.Regis regis:getCustomer()){
@@ -100,13 +122,19 @@ public class Database {
             writer.write("");
             writer.flush();
         }catch (Exception ignored) {//ignored
+
+
         }
     }
+
+
+
+
 
     public static Categories getCategoriesById(int id) {
            Categories findCategories=new Categories();
            for(Categories cat: getCategories()){
-               if(findCategories.getId()==id){
+               if(cat.getId()==id){
                    findCategories=cat;
                    break;
                }
@@ -114,16 +142,43 @@ public class Database {
         return findCategories;
     }
 
-    public static Categories getCategoriesByName(String name) {
-        Categories findCategories=new Categories();
-        for(Categories cat: getCategories()){
-            if(findCategories.getName().equalsIgnoreCase(name)){
-                findCategories=cat;
-                break;
+//    public static Categories getCategoriesByName(String name) {
+//        Categories findCategories=new Categories();
+//        for(Categories cat: getCategories()){
+//            if(findCategories.getName().equalsIgnoreCase(name)){
+//                findCategories=cat;
+//                break;
+//            }
+//        }
+//        return findCategories;
+//    }
+public static Regis getCustomerById(int id){
+    Regis customer=new Regis();
+    for (Regis custom:getCustomer()){
+        if(custom.getId()==id){
+            customer=custom;
+            break;
+        }
+    }
+    return customer;
+}
+
+    public static void updateLogin(List<Login2> loginList) {
+        try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/BE/Login.txt", "rw")
+        ){
+            removeFileContent("Login");
+            raf.seek(0);
+            for (Login2 login:loginList) {
+                raf.write(login.toString().getBytes());
             }
         }
-        return findCategories;
+
+        catch(Exception e){
+            logger.info(msg);
+
+        }
     }
+
     public static int getCategoryId() {
         int id;
 
@@ -135,11 +190,20 @@ public class Database {
         ArrayList<Categories> categories = new ArrayList<>();
         for (String value:getObjects("Categories")){
             String[] arr = value.split(",");
-            Categories category=new Categories(Integer.parseInt(arr[0]),arr[1]);
-            categories.add(category);
+
+            try {
+                Categories category=new Categories( Integer.parseInt(arr[0]),arr[1]);
+                categories.add(category);
+
+            } catch (NumberFormatException e) {
+
+            }
+
         }
         return categories;
     }
+
+
 
     public static void updateCategories(List<Categories>categories){
         try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/BE/Categories.txt", "rw")
@@ -154,4 +218,24 @@ public class Database {
 
         }
     }
+
+
+
+    public static void updateProducts(List<Product>products){
+        try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/BE/Products.txt", "rw"))
+        {
+            removeFileContent("Products");
+            raf.seek(0);
+            for (Product product:products) {
+                raf.write(product.toString().getBytes());
+
+            }
+        }
+        catch(Exception e){
+            logger.info(msg);
+
+        }
+    }
+
+
 }

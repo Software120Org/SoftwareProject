@@ -63,7 +63,7 @@ public class Login2 {
                 AdminDashboard admin = new AdminDashboard();
                 admin.adminPage();
             } else if (loginVar.getRul().equals("customer")) {
-                CustomerLogin customerLogin = new CustomerLogin();
+                CustomerDashboard customerLogin = new CustomerDashboard();
                 customerLogin.setCustomer(Database.GitCustomerbyE(email));
                 customerLogin.customerPage();
             }
@@ -74,7 +74,7 @@ public class Login2 {
         admin.adminDashboard();
     }
     public void customerLogin() {
-        CustomerLogin customerLogin = new CustomerLogin();
+        CustomerDashboard customerLogin = new CustomerDashboard();
         customerLogin.setCustomer(Database.GitCustomerbyE(email));
         customerLogin.menu();
     }

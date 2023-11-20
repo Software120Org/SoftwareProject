@@ -9,7 +9,7 @@ import io.cucumber.java.en.When;
 
 import java.util.List;
 
-import static Classes.RegisCust.logger;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -23,7 +23,7 @@ public class UpdateCategory {
     @Given("that the admin choose to update category")
     public void that_the_admin_choose_to_update_category() {
         admin=new AdminDashboard();
-        categories=Database.getCategoriesById(2);
+        categories=Database.getCategoriesById(4);
 
     }
     @When("i select to update category name = {string}")
@@ -35,7 +35,7 @@ public class UpdateCategory {
     @Then("category name will updated successfully")
     public void category_name_will_updated_successfully() {
         assertEquals(categories.getName(), value);
-        logger.info("Category updated successfully :)");
+        System.out.println("Category updated successfully :)");
     }
 
 

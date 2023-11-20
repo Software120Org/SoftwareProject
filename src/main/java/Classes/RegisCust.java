@@ -35,7 +35,7 @@ public static Logger logger=Logger.getLogger(RegisCust.class.getName());
         regis.setAddress(in.nextLine());
         logger.info("Enter customer Password ");
         regis.setPassword(in.nextLine());
-        regis.setId(Database.getCategoryId());
+        regis.setId(Database.get_Id());
         if(regis.isUnUniqueEmail()){//dosnt work
             logger.info("This email is already taken.....PLEAS! Enter new Email");
           //  logger.info("Enter new Email");

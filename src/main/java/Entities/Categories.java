@@ -1,7 +1,7 @@
 package Entities;
 
 public class Categories {
-    private int id;
+    private Integer id;
     private String name;
     private Categories existCategories;
 
@@ -9,7 +9,7 @@ public class Categories {
 
     }
 
-    public Categories(int id,String name){
+    public Categories(Integer id,String name){
         this.id=id;
         this.name=name;
     }
@@ -19,7 +19,7 @@ public class Categories {
         this.name=name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
