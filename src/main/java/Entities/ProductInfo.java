@@ -73,18 +73,7 @@ public class ProductInfo {
 
       }
 
-    public static void storeProducts(List<Product> products) {
-        try(RandomAccessFile writer = new RandomAccessFile("src/main/resources/BE/Products", "rw")){
-            for (Product product:products) {
-                writer.seek(writer.length());
-                writer.write(product.toString().getBytes());
-                writer.write("\n".getBytes());
-            }
-        }
-        catch(Exception e){
-            logger.info("Error");
-        }
-    }
+
 
 
 
@@ -105,6 +94,9 @@ public class ProductInfo {
         id=getProduct().get(getProduct().size()-1).getProduct_id();
         return id+1;
     }
+
+
+
 
 
     }

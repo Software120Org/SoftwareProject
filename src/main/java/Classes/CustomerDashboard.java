@@ -5,6 +5,8 @@ import Entities.Product;
 import Entities.ProductInfo;
 import Entities.Regis;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -17,13 +19,15 @@ public class CustomerDashboard {
         return customer;
     }
 
-    Logger logger = Logger.getLogger(CustomerDashboard.class.getName());
+    static Logger logger = Logger.getLogger(CustomerDashboard.class.getName());
     public void menu(){
         logger.info("If you want to see all products enter number 1");
         logger.info("If you want to search for any product enter number 2");
-        logger.info("If you want to see your information enter number 3");
-        logger.info("If you want to update your information enter number 4");
-        logger.info("If you want to logout enter number 5");
+        logger.info("If you want to add new order enter number 3");
+        logger.info("If you want to see your orders enter number 4");
+        logger.info("If you want to see your information enter number 5");
+        logger.info("If you want to update your information enter number 6");
+        logger.info("If you want to logout enter number 7");
 
     }
 
@@ -33,7 +37,6 @@ public class CustomerDashboard {
         menu();
         try {
             int option = input.nextInt();
-
             while (true){
                 if(option==1){
                     printProducts();
@@ -43,11 +46,19 @@ public class CustomerDashboard {
                  searchProduct();
                 }
 
-                else if(option==3){
-                    logger.info(()->String.valueOf(customer));
+                else if (option==3) {
+                    takenOrder();
                 }
 
                 else if (option==4) {
+                    viewOrders();
+                }
+
+                else if(option==5){
+                    logger.info(()->String.valueOf(customer));
+                }
+
+                else if (option==6) {
                     updateMenu();
                     int x=input.nextInt();
                     String attribute="";
@@ -72,7 +83,8 @@ public class CustomerDashboard {
                     updateInformation(attribute,value);
                 }
 
-                else if(option==5){
+                else if(option==7){
+                    logger.info("Good bye :)))");
                     break;
                 }
                 menu();
@@ -91,14 +103,15 @@ public class CustomerDashboard {
     public void printProducts(){
         List<Product> products = ProductInfo.getProduct();
         logger.info("************************************************************** Products ***************************************************************");
-        logger.info("      ProductName                             Description                                              CategoryName      Price      Availability ");
+        logger.info("ProductID      ProductName                             Description                                              CategoryName      Price      Availability ");
         for (Product product:products){
-            logger.info(product.getProductName()+"\t\t\t\t"+
+            logger.info(product.getProduct_id()+"\t\t\t\t"+product.getProductName()+"\t\t\t\t"+
                     product.getDescription()+"\t\t"+product.getCategory()+
                     "\t\t"+product.getPrice()+"\t\t"+product.getAvailability());
-
         }
     }
+
+
 
     public void searchProduct(){
         logger.info("Enter the name of the product you want to search:");
@@ -106,7 +119,7 @@ public class CustomerDashboard {
         String name = in.nextLine();
         List<Product> products = ProductInfo.searchProduct(name);
         logger.info("**************************************************************** Products **********************************************************");
-        logger.info("      ProductName                             Description                                              CategoryName      Price      Availability ");
+        logger.info("     ProductName                             Description                                              CategoryName      Price      Availability ");
         for (Product product:products){
             logger.info(product.getProductName()+"\t\t\t\t"+
                     product.getDescription()+"\t\t"+product.getCategory()+
@@ -114,6 +127,80 @@ public class CustomerDashboard {
 
         }
     }
+
+
+
+
+    public Order takeOrder() {
+        List<Product> products = new ArrayList<>();
+        Order order = new Order();
+        order.setCustomer(this.customer);
+        while (true) {
+            printProducts();
+            Scanner input = new Scanner(System.in);
+            logger.info("Enter the product id you want to add in your orders: ");
+            int id = input.nextInt();
+            Product product1;
+            product1=ProductInfo.getProductByProductId(id);
+            products.add(product1);
+            double out=0;
+            for (Product product:products){
+                order.setId(Database.getOrderId());
+                order.setCustomer(this.customer);
+                order.setDate(LocalDate.now());
+                order.setProductID(product.getProduct_id());
+                out+=product.getPrice();
+                order.setTotalPrice(out);
+                order.setProductID(id);
+
+            }
+            order=new Order(products);
+            order.setProducts(products);
+            order.setProductID(id);
+            Scanner in=new Scanner(System.in);
+            logger.info("Do you want to add another product to this order?  \"(yes / no)\"");
+            String ans = in.nextLine();
+            if (ans.equalsIgnoreCase("no")) {
+                break;
+            }
+        }
+
+        return order;
+
+    }
+
+
+
+
+    public void takenOrder(){
+        Order order=takeOrder();
+        order.setCustomer(this.customer);
+        logger.info("The price is:"+order.getTotalPrice());
+        addOrder(order);
+
+    }
+
+
+    public void addOrder(Order order) {
+        Database.storeObject("Orders",order);
+        logger.info("The Order Added Successfully :))");
+    }
+
+
+    public void viewOrders() {
+
+        logger.info("Customer Name\t\t\tOrder Date\t\t\tTotal Price \n Your products:  ");
+        for (Order order : Database.getOrderByCustomer(customer)) {
+
+            logger.info(order.getString());
+
+
+        }
+
+
+    }
+
+
 
 
     public void updateMenu(){
@@ -149,8 +236,9 @@ public class CustomerDashboard {
     public void updatedMessage() {
         logger.info("Your information updated Successfully :))");
     }
+
     public void setCustomer (Regis customer){
                 this.customer = customer;
             }
 
-        }
+}

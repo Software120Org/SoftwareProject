@@ -79,11 +79,11 @@ public class Regis {
     @Override
     public String toString() {
         return  id +
-                ",," + name +
-                ",,"  +email+
-                ",," + phone +
-                ",," + address +
-                ",," + password +"\n";
+                "," + name +
+                ","  +email+
+                "," + phone +
+                "," + address +
+                "," + password +"\n";
     }
     public boolean isUnUniqueEmail() {
 

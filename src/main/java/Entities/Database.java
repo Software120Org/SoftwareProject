@@ -1,11 +1,13 @@
 package Entities;
 
 import Classes.Login2;
+import Classes.Order;
 import Classes.RegisCust;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.RandomAccessFile;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -13,10 +15,14 @@ import java.util.logging.Logger;
 
 public class Database {
     static String msg= "Error";
-    private Database(){
-    }
     static String path="src/main/resources/BE/";
     static Logger logger = Logger.getLogger(Database.class.getName());
+
+
+    private Database(){
+    }
+
+
     public static List<String> getObjects(String fileName){
         List<String> objects=new ArrayList<>();
         try ( RandomAccessFile raf =new RandomAccessFile(path+fileName+".txt", "rw")){
@@ -38,6 +44,7 @@ public class Database {
         }
         catch(Exception e){
             logger.info(msg);
+            System.out.println(e);
 
         }
     }
@@ -142,16 +149,7 @@ public class Database {
         return findCategories;
     }
 
-//    public static Categories getCategoriesByName(String name) {
-//        Categories findCategories=new Categories();
-//        for(Categories cat: getCategories()){
-//            if(findCategories.getName().equalsIgnoreCase(name)){
-//                findCategories=cat;
-//                break;
-//            }
-//        }
-//        return findCategories;
-//    }
+
 public static Regis getCustomerById(int id){
     Regis customer=new Regis();
     for (Regis custom:getCustomer()){
@@ -238,4 +236,68 @@ public static Regis getCustomerById(int id){
     }
 
 
+
+
+    public static List<Order> getOrders(){
+        List<Order> orders = new ArrayList<>();
+
+            for (String value : getObjects("Orders")) {
+                List<Product> products;
+                String[] arr = value.split(",");
+                Order order = new Order();
+                order.setId(Integer.parseInt(arr[0]));
+                Regis customer = getCustomerById(Integer.parseInt(arr[1]));
+                order.setDate(LocalDate.parse(arr[2]));
+                order.setTotalPrice(Double.parseDouble(arr[3]));
+                order.setProductID(Integer.parseInt(arr[4]));
+                order.setCustomer(customer);
+                products = getProductByOrder(order.getProductID());
+                order.setProducts(products);
+                orders.add(order);
+            }
+
+        return orders;
+    }
+
+
+    public static int getOrderId(){
+        int id;
+        id=getOrders().get(getOrders().size()-1).getId();
+        return id+1;
+    }
+
+
+    public  static List<Product> getProductByOrder(int id){
+        List<Product> products=new ArrayList<>();
+        for (Product product1: ProductInfo.getProduct()){
+            if(product1.getProduct_id()==id){
+                products.add(product1);
+            }
+        }
+
+        return products;
+    }
+
+
+    public static List<Order> getOrderByCustomer(Regis customer){
+        List<Order>orders=new ArrayList<>();
+        for (Order order1:getOrders()){
+            if(order1.getCustomer().getId()==(customer.getId())){
+                orders.add(order1);
+            }
+        }
+        return orders;
+    }
+
+
+    public static Regis getCustomerByEmail(String email) {
+        Regis foundCustomer=new Regis();
+        for(Regis customer:getCustomer()){
+            if(customer.getEmail().equals(email)){
+                foundCustomer=customer;
+                break;
+            }
+        }
+        return foundCustomer;
+    }
 }

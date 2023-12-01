@@ -13,17 +13,16 @@ public class AdminDashboard {
 
     String msg="Enter valid number: ";
     String msg2="Invalid Input, try again...";
-    String status ="waiting...";
-    private boolean logged;
+
     public void setEmail(String email) {
         this.admin.setEmail(email);
     }
     public void adminDashboard() {
         logger.info("To view all customers details enter number 1 ");
-        logger.info("To view all  products categories enter number 2 ");
+        logger.info("To view all products categories enter number 2 ");
         logger.info("To view all products listings enter number 3 ");
         logger.info("To view all orders details enter number 4 ");
-        logger.info("To logout enter number 4");
+        logger.info("To logout enter number 5");
     }
 
     public void adminPage() {
@@ -33,7 +32,7 @@ public class AdminDashboard {
             try {
                 adminDashboard();
                 int option = in.nextInt();
-                if (option == 4) {
+                if (option == 5) {
                     logger.info("Goodbye");
                     cond = false;
                 } else {
@@ -48,7 +47,6 @@ public class AdminDashboard {
     }
     public void adminOptions(int select){
         if (select ==1){
-
             customerMenu();
         }
         else if (select ==2) {
@@ -491,6 +489,9 @@ public class AdminDashboard {
     public String Spaces(String att){
         return " ".repeat(Math.max(0, 35 - att.length()));
     }
+
+
+
 
     }
 

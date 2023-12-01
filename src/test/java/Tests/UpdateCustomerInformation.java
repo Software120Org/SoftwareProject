@@ -20,7 +20,7 @@ public class UpdateCustomerInformation {
     @Given("that I choose to update customer information")
     public void that_i_choose_to_update_customer_information() {
         customer = new CustomerDashboard();
-        customer.setCustomer(Database.getCustomer().get(5));
+        customer.setCustomer(Database.getCustomer().get(2));
     }
 
 
