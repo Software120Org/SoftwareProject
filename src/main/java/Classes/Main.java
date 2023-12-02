@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public class Main {
     static Logger logger = Logger.getLogger(Main.class.getName());
     public static void menu(){
-        logger.info("Welcome to *********** System");
+        logger.info("Welcome to A&W car company :) ");
         logger.info("If you want to login enter number 1");
         logger.info("If you are new customer enter number 2");
 
@@ -26,7 +26,7 @@ public class Main {
             menu();
             option = in.nextInt();
         } catch (InputMismatchException e) {
-            logger.info("please enter a valid number");
+            logger.info("Please enter a valid number");
             main(new String[5]);
         }
         if (option == 1) {
@@ -41,7 +41,7 @@ public class Main {
     public static void userLogin(){
 
         Scanner in=new Scanner(System.in);
-        logger.info("***************Welcome Back***************");
+        logger.info("*************** Welcome Back ***************");
         while(true) {
             logger.info("Enter your email: ");
             String email = in.nextLine();
