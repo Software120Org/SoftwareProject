@@ -2,8 +2,14 @@ package Entities;
 
 import Entities.Database;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -124,7 +130,8 @@ public boolean isValidEmail(){
         return flag;
     }
 
-  /*  public void sendEmail(String title,String message,String msg){
+
+    public void sendEmail(String title,String message,String msg){
         final String user = "rubasalon5@gmail.com";
         final String emailPass = "wntxcpwbkocnjjdm";
         String to = this.getEmail();
@@ -151,7 +158,10 @@ public boolean isValidEmail(){
             logger.info(msg);
         } catch (Exception ignored) {
             //ignored
-        }*/
+        }}
+    static Logger logger = Logger.getLogger(Regis.class.getName());
+
+
 
 
 

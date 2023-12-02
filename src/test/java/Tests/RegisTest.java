@@ -92,7 +92,8 @@ public class RegisTest {
     }
     @Then("confirmation email will be sent to customer")
     public void confirmation_email_will_be_sent_to_customer() {
-
+        assertTrue(customer.isValidEmail());
+        customer.sendEmail("Signup","Hello You are Signed-Up to Car  Company Welcome to our application","We send a confirmation message to customer on email");
 
     }
     @Then("I show a message that the email is already taken")
