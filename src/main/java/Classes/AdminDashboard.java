@@ -570,6 +570,18 @@ public class AdminDashboard {
     }
 
 
+    public static boolean isExitDate(int id){
+        boolean flag=false;
+        for(addInstallDate addInstallDate:Database.gitDate()){
+            if(addInstallDate.getId()==id){
+                flag=true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+
     public String Spaces(String att){
         return " ".repeat(Math.max(0, 35 - att.length()));
     }
