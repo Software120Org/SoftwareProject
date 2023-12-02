@@ -21,7 +21,7 @@ public class AdminDashboard {
         logger.info("To view all customers details enter number 1 ");
         logger.info("To view all products categories enter number 2 ");
         logger.info("To view all products listings enter number 3 ");
-        logger.info("To view all orders details enter number 4 ");
+        logger.info("To mange installation times enter number 4");
         logger.info("To logout enter number 5");
     }
 
@@ -56,6 +56,9 @@ public class AdminDashboard {
         else if (select ==3) {
 
             productsMenu();
+        }
+        else if (select==4) {
+            intallationMenu();
         }
 
     }
@@ -485,6 +488,87 @@ public class AdminDashboard {
 
         Database.updateProducts(products);
     }
+
+
+
+    public void intallationMenu(){
+        boolean cond=true;
+        while (cond){
+            logger.info("If you want to see all installation dates enter number 1");
+            logger.info("If you want to add new installation dates enter number 2");
+            logger.info("If you want to delete installation dates enter number 3");
+            logger.info("If you want to back enter number 4");
+            Scanner inputt = new Scanner(System.in);
+            int k;
+            try{
+                k= inputt.nextInt();
+            }
+            catch (Exception ignored){
+                logger.info(msg);
+                break;
+            }if (k == 4) {
+                cond=false;
+            }
+            else{
+                installationOptions(k);
+            }
+        }
+    }
+
+    public void installationOptions(int option){
+        if(option==1){
+            printInstallations();
+        } else if (option==2) {
+            addInstall.recordInstall();
+
+        } else if (option==3) {
+            deleteInstallations();
+        }
+    }
+
+    public void printInstallations() {
+        List<addInstallDate>addInstallDates=Database.gitDate();
+        logger.info("******************* Installation dates ********************");
+        logger.info("ID            Date            Time");
+        for (addInstallDate installDate:addInstallDates){
+            logger.info(installDate.getId()+"\t\t\t\t"+ installDate.getDate()+"\t\t"+installDate.getTime());
+        }
+    }
+    public void deleteInstallations() {
+        logger.info("Enter the id of the Installations date you want to delete:  ");
+        Scanner in=new Scanner(System.in);
+        addInstallDate addInstallDate=new addInstallDate();
+        boolean flag = false;
+        try {
+            int id =in.nextInt();
+            addInstallDate.setId(id);
+            flag= addInstallDate.isExitdate();
+
+        }
+        catch (InputMismatchException e){
+            logger.info(msg2);
+        }
+        if(flag) {
+            deletedate(addInstallDate);
+            logger.info("The category removed successfully :)");
+        }
+        else{
+            logger.info("This category doesn't exist !!!");
+        }
+    }
+
+    public void deletedate(addInstallDate addInstallDate){
+        List<addInstallDate>addInstallDates=Database.gitDate();
+        for(addInstallDate install:addInstallDates){
+            if(install.getId()==addInstallDate.getId()){
+                addInstallDates.remove(install);
+                break;
+            }
+        }
+        Database.updateInstallation(addInstallDates);
+
+    }
+
 
     public String Spaces(String att){
         return " ".repeat(Math.max(0, 35 - att.length()));

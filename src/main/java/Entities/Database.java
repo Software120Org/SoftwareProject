@@ -266,6 +266,99 @@ public static Regis getCustomerById(int id){
         return id+1;
     }
 
+    public static List<addInstallDate> gitDate() {
+        List<addInstallDate> installDates = new ArrayList<>();
+        for (String install : getObjects("dates")) {
+            String[] arr = install.split("      ");
+            try {
+                if (arr.length >= 4) {
+                    addInstallDate addInstallDate = new addInstallDate(
+                            Integer.parseInt(arr[0]),
+                            arr[1],
+                            arr[2],
+                            arr[3] // Assuming status is at index 3 in your data
+                    );
+                    installDates.add(addInstallDate);
+                }
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                // Handle parsing or index out of bounds exception if necessary
+            }
+        }
+        return installDates;
+    }
+
+    public static int get_install_id() {
+        List<Entities.addInstallDate> gitDates = gitDate();
+
+        if (gitDates != null && !gitDates.isEmpty()) {
+            int id = gitDates.get(gitDates.size() - 1).getId();
+            return id + 1;
+        } else {
+            // Handle case where gitDate() returns null or an empty list
+            return 0;
+        }
+    }
+    public static addInstallDate getDateById(int id){
+        addInstallDate addInstallDate=new addInstallDate();
+        for (addInstallDate add:gitDate() ){
+            if (add.getId()==id){
+                addInstallDate =add;
+                break;
+            }
+        }return addInstallDate;
+    }
+
+    public static void updateInstallation(List<addInstallDate>addInstallDates){
+        try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/BE/dates.txt", "rw")
+        ){
+            removeFileContent("dates");
+            raf.seek(0);
+            for (addInstallDate install : addInstallDates) {
+                raf.write(install.toString().getBytes());
+            }
+        }
+        catch(Exception e){ //ignored
+
+        }
+    }
+
+    public static List<Entities.Installation> getInstall() {
+        List<Entities.Installation> Instal = new ArrayList<>();
+        for (String inst : getObjects("install")) {
+            String[] arr = inst.split(",,");
+            try {
+                if (arr.length >= 7) {
+                    int instId = Integer.parseInt(arr[0]);
+                    Entities.Installation installation = new Entities.Installation(instId, arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
+                    Instal.add(installation);
+                } else {
+                    System.err.println("Incomplete data: " + inst);
+                    // Log or handle incomplete data as needed
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("Error parsing data: " + inst);
+                e.printStackTrace(); // Log the exception or handle it appropriately
+            }
+        }
+        return Instal;
+    }
+
+    public static int getReqId() {
+        List<Entities.Installation> installations = getInstall();
+
+        int maxId = 0;
+        for (Entities.Installation installation : installations) {
+            if (installation.getId() > maxId) {
+                maxId = installation.getId();
+            }
+        }
+
+        return maxId + 1;
+    }
+
+
+
+
 
     public  static List<Product> getProductByOrder(int id){
         List<Product> products=new ArrayList<>();

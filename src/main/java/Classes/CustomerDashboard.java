@@ -25,9 +25,10 @@ public class CustomerDashboard {
         logger.info("If you want to search for any product enter number 2");
         logger.info("If you want to add new order enter number 3");
         logger.info("If you want to see your orders enter number 4");
-        logger.info("If you want to see your information enter number 5");
-        logger.info("If you want to update your information enter number 6");
-        logger.info("If you want to logout enter number 7");
+        logger.info("If you want, submit an installation request, enter number 5");
+        logger.info("If you want to see your information enter number 6");
+        logger.info("If you want to update your information enter number 7");
+        logger.info("If you want to logout enter number 8");
 
     }
 
@@ -53,12 +54,17 @@ public class CustomerDashboard {
                 else if (option==4) {
                     viewOrders();
                 }
+                else if (option==5) {
 
-                else if(option==5){
+                    InstallRequests recordInstallation = new InstallRequests();
+                    recordInstallation.recordInstallation();
+
+                }
+                else if(option==6){
                     logger.info(()->String.valueOf(customer));
                 }
 
-                else if (option==6) {
+                else if (option==7) {
                     updateMenu();
                     int x=input.nextInt();
                     String attribute="";
@@ -83,7 +89,7 @@ public class CustomerDashboard {
                     updateInformation(attribute,value);
                 }
 
-                else if(option==7){
+                else if(option==8){
                     logger.info("Good bye :)))");
                     break;
                 }
