@@ -375,7 +375,7 @@ public class AdminDashboard {
 
     public void printProducts(){
         List<Product> products = ProductInfo.getProduct();
-        logger.info("******************* Products ********************");
+        logger.info("***************************************************************** Products ****************************************************************************");
         logger.info("ProductId      ProductName                             Description                                              CategoryName      Price      Availability ");
         for (Product product:products){
             logger.info(product.getProduct_id()+"\t\t"+product.getProductName()+"\t\t\t\t"+
@@ -397,7 +397,7 @@ public class AdminDashboard {
         product.setCategory(Category.valueOf(input.nextLine()));
         logger.info("Enter product price: ");
         product.setPrice(Double.parseDouble(input.nextLine()));
-        logger.info("Enter product availability: ");
+        logger.info("Enter product availability (true,false): ");
         product.setAvailability(Boolean.getBoolean(input.nextLine()));
         product.setProduct_id(ProductInfo.getProductId());
         addProduct(product);
@@ -416,7 +416,7 @@ public class AdminDashboard {
         String name = in.nextLine();
         List<Product> products = ProductInfo.searchProduct(name);
         logger.info("**************************************************************** Products **********************************************************");
-        logger.info("      ProductName                             Description                                              CategoryName      Price      Availability ");
+        logger.info("ProductName                             Description                                          CategoryName      Price      Availability ");
         for (Product product:products){
             logger.info(product.getProductName()+"\t\t\t\t"+
                     product.getDescription()+"\t\t"+product.getCategory()+

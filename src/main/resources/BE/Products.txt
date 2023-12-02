@@ -8,13 +8,3 @@
 8,Fast-Charging USB Car Charger,Charge your devices on the go with this powerful and compact car charger,Electronics,9.99,true
 9,Bluetooth Car Kit,Stay connected hands-free with this Bluetooth car kit,Electronics,34.99,true
 10,Backup Camera,High-definition backup camera for enhanced rearview visibility,Electronics,49.99,true
-11,new product,new description,Interior,200.0,true
-12,seat cover,comfort and durability,Interior,100.0,false
-13,seat cover,comfort and durability,Interior,100.0,false
-14,seat cover,comfort and durability,Interior,100.0,false
-15,seat cover,comfort and durability,Interior,100.0,false
-16,seat cover,comfort and durability,Interior,100.0,false
-17,seat cover,comfort and durability,Interior,100.0,false
-18,seat cover,comfort and durability,Interior,100.0,false
-19,seat cover,comfort and durability,Interior,100.0,false
-20,seat cover,comfort and durability,Interior,100.0,false

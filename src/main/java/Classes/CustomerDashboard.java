@@ -15,6 +15,10 @@ import java.util.logging.Logger;
 public class CustomerDashboard {
     private Regis customer;
 
+
+
+    private Login2 login2;
+
     public Regis getCustomer() {
         return customer;
     }
@@ -35,6 +39,7 @@ public class CustomerDashboard {
     public void customerPage() {
         logger.info("Welcome To The Customer Dashboard ");
         Scanner input=new Scanner(System.in);
+
         menu();
         try {
             int option = input.nextInt();
@@ -66,22 +71,23 @@ public class CustomerDashboard {
 
                 else if (option==7) {
                     updateMenu();
+                    Scanner input2=new Scanner(System.in);
                     int x=input.nextInt();
                     String attribute="";
                     String value="";
                     if (x == 1) {
                         logger.info("Enter new password: ");
-                        value = input.nextLine();
+                        value = input2.nextLine();
                         attribute="password";
 
                     } else if (x == 2) {
                         logger.info("Enter New phone number: ");
-                        value = input.nextLine();
+                        value = input2.nextLine();
                         attribute="phone";
 
                     } else if (x == 3) {
                         logger.info("Enter New address: ");
-                        value = input.nextLine();
+                        value = input2.nextLine();
                         attribute = "address";
 
                     }
@@ -125,7 +131,7 @@ public class CustomerDashboard {
         String name = in.nextLine();
         List<Product> products = ProductInfo.searchProduct(name);
         logger.info("**************************************************************** Products **********************************************************");
-        logger.info("     ProductName                             Description                                              CategoryName      Price      Availability ");
+        logger.info("ProductName                             Description                                              CategoryName      Price      Availability ");
         for (Product product:products){
             logger.info(product.getProductName()+"\t\t\t\t"+
                     product.getDescription()+"\t\t"+product.getCategory()+
@@ -181,7 +187,7 @@ public class CustomerDashboard {
     public void takenOrder(){
         Order order=takeOrder();
         order.setCustomer(this.customer);
-        logger.info("The price is:"+order.getTotalPrice());
+        logger.info("The price is: "+order.getTotalPrice());
         addOrder(order);
 
     }
@@ -215,12 +221,18 @@ public class CustomerDashboard {
         logger.info("If you want to update your address enter number 3");
     }
 
-    public void updateInformation(String attribute, String value) {
 
+    public void updateInformation(String attribute, String value) {
+        login2= new Login2();
+        login2.setEmail(customer.getEmail());
+        login2.setRul("customer");
         if (attribute.equalsIgnoreCase("Phone")) {
             customer.setPhone(value);
+
+
         } else if (attribute.equalsIgnoreCase("Password")) {
             customer.setPassword(value);
+            login2.setPassword(value);
         } else if (attribute.equalsIgnoreCase("Address")) {
             customer.setAddress(value);
         }
@@ -235,9 +247,22 @@ public class CustomerDashboard {
 
             }
         }
+        List<Login2> login = Database.users();
+        for (Login2 login1 : login) {
+            int ind = login.indexOf(login1);
+            if (login1.getEmail().equalsIgnoreCase(customer.getEmail())) {
+                login.remove(ind);
+                login.add(ind,login2 );
+                break;
+
+            }
+        }
 
         Database.updateCustomers(customers);
+        Database.updateLogin(login);
+
     }
+
 
     public void updatedMessage() {
         logger.info("Your information updated Successfully :))");

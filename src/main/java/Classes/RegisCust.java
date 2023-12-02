@@ -14,9 +14,9 @@ public static Logger logger=Logger.getLogger(RegisCust.class.getName());
     public Regis recordCustomer(){
         Scanner in=new Scanner(System.in);
         Regis regis = new Regis();
-        logger.info("Enter customer Name");
+        logger.info("Enter customer Name: ");
         regis.setname(in.nextLine());
-        logger.info("Enter customer Email ");
+        logger.info("Enter customer Email:  ");
         String email = in.nextLine();
 
             while (true) {
@@ -29,11 +29,11 @@ public static Logger logger=Logger.getLogger(RegisCust.class.getName());
                 }
             }
 
-        logger.info("Enter customer Phone ");
+        logger.info("Enter customer Phone:  ");
         regis.setPhone(in.nextLine());
-        logger.info("Enter customer Address ");
+        logger.info("Enter customer Address:  ");
         regis.setAddress(in.nextLine());
-        logger.info("Enter customer Password ");
+        logger.info("Enter customer Password:  ");
         regis.setPassword(in.nextLine());
         regis.setId(Database.get_Id());
         if(regis.isUnUniqueEmail()){//dosnt work
@@ -66,19 +66,7 @@ public static Logger logger=Logger.getLogger(RegisCust.class.getName());
         Matcher matcher=pattern.matcher(email);
         return matcher.find();
     }
-  /* public boolean isUnUniqueEmail(String email) {
 
-        List<Regis>Customars;
-        Customars=dFiles.getCustomer();
-        int flag =0;
-        for(Regis customer: Customars){
-            if(customer.getEmail().equals(email)){
-                flag=1;
 
-                break;
-            } }
-        return flag == 1;
-
-    }*/
   }
 

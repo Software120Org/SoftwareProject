@@ -61,10 +61,9 @@ public class ProductInfo {
                             .build();
                     products.add(product);
                 }
-                else{
-                    logger.info("Sorry, this product doesn't exist in our company :( ");
-                }
+
             }
+
             fromFile.close();
         }catch (Exception e) {
             logger.info(e.getMessage());
