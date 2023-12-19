@@ -20,4 +20,5 @@ jobs:
       - name: Step 3 - Build Maven Project
         run: mvn --batch-mode -DskipTests package
 
-      
+      - name: Step 4 - Run test cases 
+        run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
