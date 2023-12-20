@@ -135,12 +135,11 @@ public class AdminDashboard {
     }
 
     public void deleteCustomer(Regis customer){
-        int flag=0;
+       
         List<Regis>customers=Database.getCustomer();
         for(Regis customer1:customers){
             if(customer1.getId()==(customer.getId())){
                 customers.remove(customer1);
-                flag=1;
                 break;
             }
         }
