@@ -2,13 +2,11 @@ package Classes;
 
 import Entities.Database;
 import Entities.Product;
-import Entities.ProductInfo;
 import Entities.Regis;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class Order {
     private int id;
