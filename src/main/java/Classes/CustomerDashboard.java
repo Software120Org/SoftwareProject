@@ -16,9 +16,6 @@ public class CustomerDashboard {
     private Regis customer;
 
 
-
-    private Login2 login2;
-
     public Regis getCustomer() {
         return customer;
     }
@@ -187,7 +184,7 @@ public class CustomerDashboard {
     public void takenOrder(){
         Order order=takeOrder();
         order.setCustomer(this.customer);
-        logger.info("The price is: "+order.getTotalPrice());
+        logger.info("The total price is: "+order.getTotalPrice());
         addOrder(order);
 
     }
@@ -223,7 +220,7 @@ public class CustomerDashboard {
 
 
     public void updateInformation(String attribute, String value) {
-        login2= new Login2();
+        Login2 login2 = new Login2();
         login2.setEmail(customer.getEmail());
         login2.setRul("customer");
         if (attribute.equalsIgnoreCase("Phone")) {
@@ -252,7 +249,7 @@ public class CustomerDashboard {
             int ind = login.indexOf(login1);
             if (login1.getEmail().equalsIgnoreCase(customer.getEmail())) {
                 login.remove(ind);
-                login.add(ind,login2 );
+                login.add(ind, login2);
                 break;
 
             }
