@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: 17
-          discribtion: 'zulu'
+
 
       - name: Step 3 - Build Maven Project
         run: mvn --batch-mode -DskipTests package
