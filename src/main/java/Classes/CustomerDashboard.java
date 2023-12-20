@@ -14,7 +14,8 @@ import java.util.logging.Logger;
 
 public class CustomerDashboard {
     private Regis customer;
-
+    String space1 ="\t\t\t\t";
+    String space2 ="\t\t";
 
     public Regis getCustomer() {
         return customer;
@@ -114,9 +115,9 @@ public class CustomerDashboard {
         logger.info("************************************************************** Products ***************************************************************");
         logger.info("ProductID      ProductName                             Description                                              CategoryName      Price      Availability ");
         for (Product product:products){
-            logger.info(product.getProduct_id()+"\t\t\t\t"+product.getProductName()+"\t\t\t\t"+
-                    product.getDescription()+"\t\t"+product.getCategory()+
-                    "\t\t"+product.getPrice()+"\t\t"+product.getAvailability());
+            logger.info(product.getProduct_id()+space1+product.getProductName()+space1+
+                    product.getDescription()+space2+product.getCategory()+
+                    space2+product.getPrice()+space2+product.getAvailability());
         }
     }
 
@@ -130,9 +131,9 @@ public class CustomerDashboard {
         logger.info("**************************************************************** Products **********************************************************");
         logger.info("ProductName                             Description                                              CategoryName      Price      Availability ");
         for (Product product:products){
-            logger.info(product.getProductName()+"\t\t\t\t"+
-                    product.getDescription()+"\t\t"+product.getCategory()+
-                    "\t\t"+product.getPrice()+"\t\t"+product.getAvailability());
+            logger.info(product.getProductName()+space1+
+                    product.getDescription()+space2+product.getCategory()+
+                    space2+product.getPrice()+space2+product.getAvailability());
 
         }
     }
