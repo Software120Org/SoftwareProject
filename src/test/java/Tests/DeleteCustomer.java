@@ -24,7 +24,7 @@ public class DeleteCustomer {
     }
     @Then("Customers will be deleted")
     public void customers_will_be_deleted() {
-       assertTrue(admin.isExistCustomer(14));
+       assertTrue(admin.isExistCustomer(5));
        admin.deleteCustomer(customer);
     }
 
