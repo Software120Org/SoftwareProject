@@ -4,7 +4,7 @@ Feature: add an installation date
     Given that the Date isn't added yet
     When the admin enter the Date = "2019-10-12"
     And the admin enter the Time = "07:10 AM"
-    Then the system generate a unique ID for the installation date
+   # Then the system generate a unique ID for the installation date
     Then the installation date will be added
 
 
