@@ -21,6 +21,7 @@
             src/main/java/org/entities/Database.java,
             src/main/java/org/classes/addInstall.java,
             src/main/java/org/classes/RegisCust.java,
+            src/main/java/org/classes/InstallRequests.java,
             src/main/java/org/entities/ProductInfo.java
         </sonar.exclusions>
       
