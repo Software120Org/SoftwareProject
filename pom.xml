@@ -18,9 +18,7 @@
             src/main/java/org/classes/AdminDashboard.java,
             src/main/java/org/classes/Main.java,
             src/main/java/org/classes/CustomerDashboard.java,
-            src/main/java/org/entities/Database.java,
-            src/main/java/org/classes/registerCustomer.java,
-            src/main/java/org/entities/ProductInfo.java
+            src/main/java/org/classes/registerCustomer.java
         </sonar.exclusions>
       
   </properties>
