@@ -1,3 +1,0 @@
-1,Interior
-2,Exterior
-3,Electronics
