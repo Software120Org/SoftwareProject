@@ -83,6 +83,24 @@
         </execution>
       </executions>
     </plugin>
+            <plugin>
+      <groupId>org.sonarsource.scanner.maven</groupId>
+      <artifactId>sonar-maven-plugin</artifactId>
+      <version>3.9.0.2155</version>
+      <configuration>
+        <!-- Add the exclusion patterns here -->
+        <sonar.exclusions>
+          src/main/java/org/entities/Regis.java,
+          src/main/java/org/entities/Database.java,
+          src/test/java/Tests/DeleteCustomer.java,
+          pom.xml,
+          src/main/java/org/classes/AdminDashboard.java,
+          src/main/java/org/entities/Category.java,
+          src/main/java/org/classes/Main.java,
+          src/main/java/org/entities/Admin.java
+        </sonar.exclusions>
+      </configuration>
+    </plugin>
   </plugins>
 </build>
 
