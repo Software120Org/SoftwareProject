@@ -20,11 +20,11 @@ public class DeleteCustomer {
     }
     @When("the admin entered customer ID is exist")
     public void the_admin_entered_customer_id_is_exist() {
-        customer.setId(7);
+        customer.setId(6);
     }
     @Then("Customers will be deleted")
     public void customers_will_be_deleted() {
-       assertTrue(admin.isExistCustomer(7));
+       assertTrue(admin.isExistCustomer(6));
        admin.deleteCustomer(customer);
     }
 
