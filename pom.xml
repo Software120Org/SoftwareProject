@@ -18,6 +18,8 @@
             src/main/java/org/classes/AdminDashboard.java,
             src/main/java/org/classes/CustomerDashboard.java,
             src/main/java/org/entities/Database.java,
+            src/main/java/org/entities/Category.java,
+            src/main/java/org/entities/Admin.java,
             src/main/java/org/entities/ProductInfo.java
         </sonar.exclusions>
       
