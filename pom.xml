@@ -18,8 +18,8 @@
             src/main/java/org/classes/Main.java,
             src/main/java/org/classes/CustomerDashboard.java,
             src/main/java/org/classes/AdminDashboard.java,
-            src/main/java/org/classes/addInstall.java,
-            src/main/java/org/classes/registerCustomer.java
+            src/main/java/org/classes/AddInstall.java,
+            src/main/java/org/classes/RegisterCustomer.java
         </sonar.coverage.exclusions>
   </properties>
     <dependencies>
