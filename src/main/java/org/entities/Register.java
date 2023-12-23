@@ -1,7 +1,6 @@
 package org.entities;
 import java.util.*;
 import java.util.regex.*;
-import java.text.MessageFormat;
 public class Register {
     private int id ;
     private String name ;
